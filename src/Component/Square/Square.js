@@ -1,14 +1,16 @@
 import React from 'react';
 import './Square.css'
 
-    const Square = (props) => {
+const Square = (props) => {
 
 
-        return (
-            <div className="square">
-                <p style={{fontSize:'100px'}}>{23}</p>
-            </div>
-        );
-    };
+    return (
+        <div
+            onClick={props.gameStarted?props.clicked:null}
+            className={['square',props.gameStarted?'gameStarted':null].join(' ')}>
+            <p className="no-select">{props.val}</p>
+        </div>
+    );
+};
 
     export default Square;

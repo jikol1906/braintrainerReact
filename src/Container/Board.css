@@ -1,20 +1,60 @@
-    .board{
-        width: 500px;
-        height: 500px;
-        margin: 40px auto 0;
+.container {
+    margin-top: 60px;
+}
+
+.board{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: darkgray;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.startButton {
+    background-color:cadetblue;
+    color: white;
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    font-size: 40px;
+}
+
+.startButton:focus {
+    outline: 0;
+}
+
+.startButton:hover {
+    background-color: black;
+}
+
+.gameStarted {
+    display: none;
+}
+
+.question {
+    display: flex;
+    justify-content: center;
+}
+
+.question h1 {
+    font-size: 4rem;
+}
+
+@media(max-width: 650px) {
+    .board {
+        width: 300px;
+        height: 300px;
+        margin: auto;
         border: 5px solid black;
         border-radius: 5px;
-        background-color: darkgray;
-        display: flex;
-        flex-wrap: wrap;
     }
-
-    @media(max-width: 650px) {
-        .board {
-            width: 300px;
-            height: 300px;
-            margin: 90px auto 0;
-            border: 5px solid black;
-            border-radius: 5px;
-        }
-    }
+}

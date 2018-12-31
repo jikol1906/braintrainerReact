@@ -1,3 +1,25 @@
+.square {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+
+.square p {
+    font-size: 100px;
+    font-family: "Comic Sans MS", sans-serif;
+}
+
+.gameStarted:hover{
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+
+@media(max-width: 650px) {
     .square {
         width: 50%;
         height: 50%;
@@ -7,4 +29,9 @@
         box-sizing: border-box;
         border: 2px solid black;
     }
+
+    .square p {
+        font-size: 70px;
+    }
+}
 
