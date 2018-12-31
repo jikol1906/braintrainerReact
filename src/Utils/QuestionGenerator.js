@@ -1,3 +1,5 @@
+import {getRandomInt, shuffle} from "./HelperFunctions";
+
 export class QuestionGenerator {
 
     constructor(min, max) {
@@ -5,6 +7,7 @@ export class QuestionGenerator {
         this._min = min;
         this._max = max;
         this._question='';
+        this._answer=null;
         this._numbers = [];
 
     }
@@ -27,6 +30,7 @@ export class QuestionGenerator {
             const rand = getRandomInt(randNumber/2,randNumber);
             const toAdd = randNumber-rand;
 
+            this._answer=randNumber;
             this._question=`${rand}+${toAdd}`
         }
 
@@ -43,34 +47,11 @@ export class QuestionGenerator {
     get question() {
         return this._question;
     }
-}
 
-//Helper methods
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+    get answer() {
+        return this._answer;
     }
-
-    return a;
-}
-
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 
 
-
-
-const g = new QuestionGenerator(50,100);
-
-g.generateNumbers();
-g.generateQuestion();
-
-console.log(g.numbers);
-console.log(g.question);

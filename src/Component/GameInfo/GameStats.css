@@ -1,0 +1,8 @@
+.question {
+    display: flex;
+    justify-content: center;
+}
+
+.question h1 {
+    font-size: 4rem;
+}
