@@ -1,0 +1,21 @@
+/* Coolors Exported Palette - coolors.co/161925-23395b-85c7f2-406e8e-cbf7ed */
+/* HSL */
+/* RGB */
+.button {
+  background-color: #85c7f2;
+  color: #161925;
+  border: none;
+  border-bottom: 5px solid #6ebcf0;
+  padding: 1rem;
+  width: 10rem;
+  margin-bottom: 50px;
+  border-radius: 2px; }
+
+.button:focus {
+  outline: 0; }
+
+.button:hover {
+  background-color: #6ebcf0;
+  border-bottom: 5px solid #57b2ed; }
+
+/*# sourceMappingURL=Button.css.map */

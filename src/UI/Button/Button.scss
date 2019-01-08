@@ -5,8 +5,10 @@
   color: $black;
   border: none;
   border-bottom: 5px solid darken($lightBlue,5);
-  padding: 10px;
-  width: 100px;
+  padding: 1rem;
+  width: 10rem;
+  margin-bottom: 50px;
+  border-radius: 2px;
 }
 
 .button:focus {

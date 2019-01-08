@@ -100,7 +100,7 @@ export class GameSection extends Component {
 
 
         return (
-            <div className="container">
+            <div>
                 <GameStats
                     gameStarted={this.state.gameStarted}
                     question={this.state.question}
