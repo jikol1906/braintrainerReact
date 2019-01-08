@@ -1,39 +1,44 @@
-import './Board.css'
+import './Board.scss'
 import Square from "../Component/Square/Square";
-import React from 'react'
+import React, {PureComponent} from 'react'
 
 
-export const Board = (props) => {
+export class Board extends PureComponent{
+
+
+
+    render() {
 
         return (
-                <div className="board">
-                    <button
-                        onClick={props.startGame}
-                        className={props.gameStarted ? 'gameStarted' : 'startButton'}>
-                        <strong>Start Game!</strong>
-                    </button>
-                    <Square
-                        clicked={props.squareClicked}
-                        val={props.sqOne}
-                        gameStarted={props.gameStarted}
-                    />
-                    <Square
-                        clicked={props.squareClicked}
-                        val={props.sqTwo}
-                        gameStarted={props.gameStarted}
-                    />
-                    <Square
-                        clicked={props.squareClicked}
-                        val={props.sqThree}
-                        gameStarted={props.gameStarted}
-                    />
-                    <Square
-                        clicked={props.squareClicked}
-                        val={props.sqFour}
-                        gameStarted={props.gameStarted}
-                    />
-                </div>
+            <div className="board">
+                <button
+                    onClick={this.props.startGame}
+                    className={this.props.gameStarted ? 'gameStarted' : 'startButton'}>
+                    <strong>Start Game!</strong>
+                </button>
+                <Square
+                    clicked={this.props.squareClicked}
+                    val={this.props.sqOne}
+                    gameStarted={this.props.gameStarted}
+                />
+                <Square
+                    clicked={this.props.squareClicked}
+                    val={this.props.sqTwo}
+                    gameStarted={this.props.gameStarted}
+                />
+                <Square
+                    clicked={this.props.squareClicked}
+                    val={this.props.sqThree}
+                    gameStarted={this.props.gameStarted}
+                />
+                <Square
+                    clicked={this.props.squareClicked}
+                    val={this.props.sqFour}
+                    gameStarted={this.props.gameStarted}
+                />
+            </div>
         )
+    }
 };
 
 

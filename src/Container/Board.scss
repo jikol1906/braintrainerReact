@@ -1,15 +1,13 @@
-.container {
-    margin-top: 60px;
-}
+@import "../palette";
 
 .board{
     position: relative;
     width: 400px;
     height: 400px;
-    margin: auto;
+    margin: 30px auto;
     border: 5px solid black;
     border-radius: 5px;
-    background-color: darkgray;
+    background-color: $lightBlue;
     display: flex;
     flex-wrap: wrap;
 }
@@ -40,21 +38,12 @@
     display: none;
 }
 
-.question {
-    display: flex;
-    justify-content: center;
-}
 
-.question h1 {
-    font-size: 4rem;
-}
 
 @media(max-width: 650px) {
     .board {
         width: 300px;
         height: 300px;
-        margin: auto;
-        border: 5px solid black;
-        border-radius: 5px;
+        margin: 100px auto;
     }
 }

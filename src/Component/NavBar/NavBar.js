@@ -1,6 +1,7 @@
 import React from 'react';
-import './NavBar.css'
+import './NavBar.scss'
 import Logo from "./Logo/Logo";
+import Overlay from "../../Layout/Overlay";
 
 const NavBar = () => {
     return (

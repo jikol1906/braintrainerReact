@@ -1,60 +1,99 @@
 import React, {Component} from 'react';
-import './Board.css'
+import './Board.scss'
 import Board from "./Board";
-import {QuestionGenerator} from "../Utils/Utils";
+import {QuestionGenerator} from "../Utils/QuestionGenerator";
+import GameStats from "../Component/GameStats/GameStats";
+import Button from "../UI/Button/Button";
 
 
 export class GameSection extends Component {
 
+    constructor(props) {
+        super(props);
 
-    //<editor-fold desc="Methods">
-    state = {
-        squareOne: null,
-        squareTwo: null,
-        squareThree: null,
-        squareFour: null,
-        correctAnswer: null,
-        question: '',
-        timeLeft: null,
-        gameStarted: false,
+        this.state = {
+            intervalId:null,
+            squareOne: null,
+            squareTwo: null,
+            squareThree: null,
+            squareFour: null,
+            correctAnswer: null,
+            question: null,
+            timeLeft: null,
+            gameStarted: false,
+            gameEnded: false,
+            numOfQuestions:0,
+            correctAnswers:0
+        };
 
-    };
+        this.generator = new QuestionGenerator(30,40)
+    }
+
 
     startGame = () => {
 
         this.setState({
-            gameStarted: true
+            gameStarted: true,
+            timeLeft:60
         });
-
+        this.startTimer();
         this.setNewNumbersAndQuestion();
     };
 
-    squareClickedHandler = () => {
+    startTimer = () => {
+        const intervalId =
+            setInterval(() => {
+
+                if(this.state.timeLeft === 0) {
+                    this.endGame()
+                } else {
+                    this.setState((prevState) => ({
+                        timeLeft:prevState.timeLeft-1
+                    }))
+                }
+            },1000);
+
+        this.setState({intervalId})
+    };
+
+    squareClickedHandler = (squareValue) => {
+
+
+        this.setState((prevState) => ({
+            numOfQuestions: prevState.numOfQuestions+1,
+            correctAnswers: squareValue === this.state.correctAnswer ?
+                        prevState.correctAnswers+1:prevState.correctAnswers
+        }));
+
         this.setNewNumbersAndQuestion()
     };
 
     setNewNumbersAndQuestion() {
 
-        const gen = new QuestionGenerator(50, 100);
+        this.generator.generateNumbers();
+        this.generator.generateQuestion();
+        this.generator.incrementDifficulty();
 
-        gen.generateNumbers();
-        gen.generateQuestion();
-
-        const numbers = gen.numbers;
-        const question = gen.question;
+        const numbers = this.generator.numbers;
 
         this.setState({
             squareOne: numbers[0],
             squareTwo: numbers[1],
             squareThree: numbers[2],
             squareFour: numbers[3],
-            question
+            question:this.generator.question,
+            correctAnswer:this.generator.answer
+
         })
 
 
     }
 
-    //</editor-fold>
+
+    endGame() {
+        clearInterval(this.state.intervalId);
+        this.setState({gameEnded:true})
+    }
 
 
     render() {
@@ -62,12 +101,13 @@ export class GameSection extends Component {
 
         return (
             <div className="container">
-                <div className="question">
-                    <h1
-                        style={{visibility: !this.state.gameStarted ? 'hidden' : 'visible'}}>
-                        {this.state.gameStarted ? this.state.question : '&nbsp'}
-                    </h1>
-                </div>
+                <GameStats
+                    gameStarted={this.state.gameStarted}
+                    question={this.state.question}
+                    numOfQuestions={this.state.numOfQuestions}
+                    correctAnswers={this.state.correctAnswers}
+                    timeLeft={this.state.timeLeft}
+                />
                 <Board
                     gameStarted={this.state.gameStarted}
                     startGame={this.startGame}

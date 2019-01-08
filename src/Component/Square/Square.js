@@ -1,13 +1,13 @@
 import React from 'react';
-import './Square.css'
+import './Square.scss'
 
 const Square = (props) => {
 
 
     return (
         <div
-            onClick={props.gameStarted?props.clicked:null}
-            className={['square',props.gameStarted?'gameStarted':null].join(' ')}>
+            onClick={props.gameStarted?() => props.clicked(props.val):null}
+            className={['square','borderb',props.gameStarted?'gameStarted':null].join(' ')}>
             <p className="no-select">{props.val}</p>
         </div>
     );

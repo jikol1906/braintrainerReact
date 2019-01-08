@@ -2,13 +2,20 @@ import {getRandomInt, shuffle} from "./HelperFunctions";
 
 export class QuestionGenerator {
 
-    constructor(min, max) {
+
+
+    constructor(
+        min,
+        max,
+        divisionAndMultiplicationEnabled = false
+    ) {
 
         this._min = min;
         this._max = max;
-        this._question='';
+        this._question=null;
         this._answer=null;
         this._numbers = [];
+        this._divisionAndMultiplicationEnabled = divisionAndMultiplicationEnabled;
 
     }
 
@@ -16,7 +23,7 @@ export class QuestionGenerator {
         const numbers = shuffle([...Array(this._max).keys()].slice(this._min, this._max));
 
         for (let i = 0; i < 4; i++) {
-            this._numbers.push(numbers[i])
+            this._numbers[i] = numbers[i]
         }
 
         //const term1 = Math.round(Math.random()*this._min)
@@ -26,19 +33,40 @@ export class QuestionGenerator {
 
         if(this.numbers.length !== 0) {
             //Pick random number from numbers
-            const randNumber = this.numbers[getRandomInt(0,4)];
-            const rand = getRandomInt(randNumber/2,randNumber);
-            const toAdd = randNumber-rand;
+            this._answer = this.numbers[getRandomInt(0,4)];
 
-            this._answer=randNumber;
-            this._question=`${rand}+${toAdd}`
+            if(getRandomInt(0,2)===1) {
+                this.generateAdditionQuestion();
+            } else {
+                this.generateSubtractionQuestion();
+            }
+
         }
-
-
 
     }
 
-    //Getters
+    incrementDifficulty() {
+        this._min = this._min+1;
+        this._max = this._max+1;
+    }
+
+
+    generateAdditionQuestion() {
+        const rand = getRandomInt(this.answer / 2, this.answer);
+        const toAdd = this.answer - rand;
+        this._question = `${rand}+${toAdd}`
+    }
+
+    generateSubtractionQuestion() {
+        const rand = getRandomInt(0, this.answer/2);
+        const toSubtract = this.answer + rand;
+        this._question = `${toSubtract}-${rand}`
+    }
+
+
+
+
+//Getters
 
     get numbers() {
         return this._numbers;

@@ -1,0 +1,29 @@
+@import "../../palette";
+
+.question {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: $darkBlue;
+
+    h1 {
+        font-size: 3rem;
+    }
+}
+
+.statContainer {
+    width: 33.3333333%;
+    text-align: center;
+}
+
+.borderLeft {
+    border-left: 1px solid $black;
+}
+
+
+
+@media (max-width: 650px) {
+    .question h1 {
+        font-size: 2rem;
+    }
+}
