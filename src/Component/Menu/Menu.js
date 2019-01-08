@@ -6,12 +6,12 @@ const Menu = props => {
     return (
         <div className="menu">
             <h2>Choose Difficulty</h2>
-            <Button>Easy</Button>
-            <Button>Medium</Button>
-            <Button>Hard</Button>
-
+            <Button clicked={() => props.diffSelected('easy')}>Easy</Button>
+            <Button clicked={() => props.diffSelected('medium')} >Medium</Button>
+            <Button clicked={() => props.diffSelected('hard')} >Hard</Button>
         </div>
     );
 };
+
 
 export default Menu;
