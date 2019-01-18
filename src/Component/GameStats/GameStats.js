@@ -10,7 +10,7 @@ const GameStats = (props) => {
                     {props.timeLeft}
                 </h1>
             </div>
-            <div className="statContainer borderLeft">
+            <div className="statContainer mid borderLeft">
                 <h1
                     style={{visibility: !props.gameStarted ? 'hidden' : 'visible'}}>
                     {props.question}

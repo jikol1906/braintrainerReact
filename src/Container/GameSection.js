@@ -4,9 +4,11 @@ import Board from "./Board";
 import {QuestionGenerator} from "../Utils/QuestionGenerator";
 import GameStats from "../Component/GameStats/GameStats";
 import Button from "../UI/Button/Button";
+import Overlay from "../Layout/Overlay";
+import Modal from "../Layout/Modal/Modal";
 
 
-export class GameSection extends Component {
+export default class GameSection extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +36,7 @@ export class GameSection extends Component {
 
         this.setState({
             gameStarted: true,
-            timeLeft:60
+            timeLeft:1
         });
         this.startTimer();
         this.setNewNumbersAndQuestion();
@@ -98,9 +100,13 @@ export class GameSection extends Component {
 
     render() {
 
-
         return (
             <div>
+                <Modal
+                    show={this.state.gameEnded}
+                    correct={this.state.correctAnswers}
+                    numOfQuestions={this.state.numOfQuestions}
+                />
                 <GameStats
                     gameStarted={this.state.gameStarted}
                     question={this.state.question}

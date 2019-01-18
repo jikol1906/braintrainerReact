@@ -3,7 +3,6 @@
 .question {
     position: relative;
     display: flex;
-    justify-content: space-between;
     background-color: $darkBlue;
 
     h1 {
@@ -12,8 +11,14 @@
 }
 
 .statContainer {
-    width: 33.3333333%;
+    flex: 1;
     text-align: center;
+
+
+}
+
+.mid {
+    flex:3;
 }
 
 .borderLeft {

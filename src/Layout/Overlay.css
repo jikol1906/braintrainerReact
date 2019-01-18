@@ -5,4 +5,23 @@
     background: black;
     height: 100%;
     width: 100%;
+    opacity: 0;
+    z-index: 9999;
+    transition: opacity 0.2s ease-in;
 }
+
+.appear {
+    opacity: 0.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+

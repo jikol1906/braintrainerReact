@@ -1,6 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Overlay.css'
 
-const Layout = (props) => <div style={{opacity:props.opacity}} className="overlay"></div>;
+class Overlay extends Component {
 
-export default Layout;
+    state = {
+        visible:false
+    }
+
+
+    componentDidMount() {
+        setTimeout(() => this.setState({visible:true}),100)
+    }
+
+
+    render() {
+        return <div className={`overlay ${this.state.visible ? 'appear' : ''}`}></div>;
+    }
+
+}
+
+export default Overlay;
+

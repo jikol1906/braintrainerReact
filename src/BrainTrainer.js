@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
 import NavBar from "./Component/NavBar/NavBar";
-import {GameSection} from "./Container/GameSection";
+import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
+import Overlay from "./Layout/Overlay";
+
 
 
 class BrainTrainer extends Component {
+
 
     difficultySelected = (difficulty) => {
         this.props.onDifficultySelected(difficulty);
         this.props.history.push('/braintrainer')
     };
+
 
     render() {
 

@@ -20,6 +20,8 @@ export class QuestionGenerator {
     }
 
     generateNumbers() {
+
+        //Generate range of random numbers between this.min and this.max
         const numbers = shuffle([...Array(this._max).keys()].slice(this._min, this._max));
 
         for (let i = 0; i < 4; i++) {
@@ -32,9 +34,11 @@ export class QuestionGenerator {
     generateQuestion() {
 
         if(this.numbers.length !== 0) {
+
             //Pick random number from numbers
             this._answer = this.numbers[getRandomInt(0,4)];
 
+            //Generate either addition or subtraction question
             if(getRandomInt(0,2)===1) {
                 this.generateAdditionQuestion();
             } else {

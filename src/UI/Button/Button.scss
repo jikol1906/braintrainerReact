@@ -1,12 +1,13 @@
 @import "../../palette";
 
 .button {
+  font-size: 20px;
   background-color: $lightBlue;
   color: $black;
   border: none;
   border-bottom: 5px solid darken($lightBlue,5);
-  padding: 1rem;
-  width: 10rem;
+  padding: 1em;
+  width: 6em;
   margin-bottom: 50px;
   border-radius: 2px;
 }
