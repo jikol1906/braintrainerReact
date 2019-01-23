@@ -26,3 +26,4 @@ yarn-error.log*
 test.js
 
 src/.sass-cache
+/.idea/workspace.xml

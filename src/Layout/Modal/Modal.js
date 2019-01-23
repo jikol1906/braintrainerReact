@@ -1,8 +1,9 @@
 import React from 'react';
 import './Modal.scss';
 import { Transition } from 'react-transition-group';
+import Button from "../../UI/Button/Button";
 
-const Modal = ({show,correct,numOfQuestions}) => {
+const Modal = ({show,correct,numOfQuestions,start}) => {
 
     return (
         <Transition
@@ -17,6 +18,7 @@ const Modal = ({show,correct,numOfQuestions}) => {
                             <div className="modal-body">
                                 <h3>Your got</h3>
                                 <p>{correct} out of {numOfQuestions} correct.</p>
+                                <Button clicked={start}>Play again?</Button>
                             </div>
                         </div>
                     </React.Fragment>

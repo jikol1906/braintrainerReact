@@ -36,7 +36,10 @@ export default class GameSection extends Component {
 
         this.setState({
             gameStarted: true,
-            timeLeft:1
+            gameEnded:false,
+            numOfQuestions:0,
+            correctAnswers:0,
+            timeLeft:60
         });
         this.startTimer();
         this.setNewNumbersAndQuestion();
@@ -106,6 +109,7 @@ export default class GameSection extends Component {
                     show={this.state.gameEnded}
                     correct={this.state.correctAnswers}
                     numOfQuestions={this.state.numOfQuestions}
+                    start={this.startGame}
                 />
                 <GameStats
                     gameStarted={this.state.gameStarted}

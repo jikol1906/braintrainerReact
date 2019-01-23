@@ -67,6 +67,11 @@ export class QuestionGenerator {
         this._question = `${toSubtract}-${rand}`
     }
 
+    reset(min,max) {
+        this._min = min;
+        this._max = max;
+    }
+
 
 
 
