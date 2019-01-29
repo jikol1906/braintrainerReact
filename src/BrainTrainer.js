@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import NavBar from "./Component/NavBar/NavBar";
-import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
 import Overlay from "./Layout/Overlay";
+import asyncComponent from "./hoc/asyncComponent";
 
-
+const asyncGameSection = asyncComponent(() => import("./Container/GameSection"));
 
 class BrainTrainer extends Component {
 
@@ -30,7 +30,7 @@ class BrainTrainer extends Component {
             },
             {
                 path:'/braintrainer',
-                component:GameSection
+                component:asyncGameSection
             }
         ];
 
