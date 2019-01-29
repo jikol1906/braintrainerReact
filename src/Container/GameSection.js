@@ -3,12 +3,11 @@ import './Board.scss'
 import Board from "./Board";
 import {QuestionGenerator} from "../Utils/QuestionGenerator";
 import GameStats from "../Component/GameStats/GameStats";
-import Button from "../UI/Button/Button";
-import Overlay from "../Layout/Overlay";
+import {connect} from 'react-redux';
 import Modal from "../Layout/Modal/Modal";
 
 
-export default class GameSection extends Component {
+class GameSection extends Component {
 
     constructor(props) {
         super(props);
@@ -54,7 +53,7 @@ export default class GameSection extends Component {
                 } else {
                     this.setState((prevState) => ({
                         timeLeft:prevState.timeLeft-1
-                    }))
+                    }));
                 }
             },1000);
 
@@ -100,6 +99,12 @@ export default class GameSection extends Component {
         this.setState({gameEnded:true})
     }
 
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId)
+    }
+
+
+
 
     render() {
 
@@ -134,3 +139,8 @@ export default class GameSection extends Component {
 
 }
 
+const mapStateToProps = props => ({
+    difficulty:props.difficulty
+});
+
+export default connect(mapStateToProps)(GameSection)
