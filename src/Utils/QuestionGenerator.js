@@ -27,8 +27,7 @@ export class QuestionGenerator {
         for (let i = 0; i < 4; i++) {
             this._numbers[i] = numbers[i]
         }
-
-        //const term1 = Math.round(Math.random()*this._min)
+        
     }
 
     generateQuestion() {

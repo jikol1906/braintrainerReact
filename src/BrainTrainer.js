@@ -4,7 +4,7 @@ import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
-import Overlay from "./Layout/Overlay";
+import HighScore from "./Component/HighScore/HighScore";
 
 
 
@@ -31,7 +31,12 @@ class BrainTrainer extends Component {
             {
                 path:'/braintrainer',
                 component:GameSection
-            }
+            },
+            {
+                path:'/highscores',
+                component:HighScore
+            },
+
         ];
 
         return (
