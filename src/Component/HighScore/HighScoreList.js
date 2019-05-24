@@ -7,20 +7,11 @@ class HighScoreList extends Component {
 
     render() {
 
-        const scores = [
-            {name:'Boris',scores:'42'},
-            {name:'Boris',scores:'42'},
-            {name:'Boris',scores:'42'},
-            {name:'Boris',scores:'42'},
-            {name:'Boris',scores:'42'},
-            {name:'Boris',scores:'42'},
-
-        ]
 
         return (
             <React.Fragment>
                 <ul className="highscores">
-                    {scores.map(({name, scores}, i) => {
+                    {this.props.scores.map(({name, scores}, i) => {
                         return (
                             <li key={i}>
                                 <span className="number">{i}</span>
