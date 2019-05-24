@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import NavBar from "./Component/NavBar/NavBar";
-import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
 import HighScoreList from "./Component/HighScore/HighScoreList";
-
-
+import asyncComponent from "./hoc/asyncComponent";
+const asyncGameSection = asyncComponent(() => import("./Container/GameSection"));
 
 class BrainTrainer extends Component {
 
@@ -19,7 +18,7 @@ class BrainTrainer extends Component {
 
     viewHighscoresSelected = () => {
         this.props.history.push('/highscores')
-    }
+    };
 
     render() {
 
@@ -35,13 +34,12 @@ class BrainTrainer extends Component {
             },
             {
                 path:'/braintrainer',
-                component:GameSection
+                component:asyncGameSection
             },
             {
                 path:'/highscores',
                 component:HighScoreList
             },
-
         ];
 
         return (
