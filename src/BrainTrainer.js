@@ -4,7 +4,7 @@ import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
-import HighScore from "./Component/HighScore/HighScore";
+import HighScoreList from "./Component/HighScore/HighScoreList";
 
 
 
@@ -17,6 +17,10 @@ class BrainTrainer extends Component {
     };
 
 
+    viewHighscoresSelected = () => {
+        this.props.history.push('/highscores')
+    }
+
     render() {
 
 
@@ -25,7 +29,8 @@ class BrainTrainer extends Component {
                 path:'/',
                 component:Menu,
                 componentProps:{
-                    diffSelected:this.difficultySelected
+                    diffSelected:this.difficultySelected,
+                    highscoresSelected: this.viewHighscoresSelected
                 }
             },
             {
@@ -34,7 +39,7 @@ class BrainTrainer extends Component {
             },
             {
                 path:'/highscores',
-                component:HighScore
+                component:HighScoreList
             },
 
         ];
