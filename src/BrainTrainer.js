@@ -5,6 +5,8 @@ import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
 import HighScoreList from "./Component/HighScore/HighScoreList";
 import asyncComponent from "./hoc/asyncComponent";
+import {loadLocalHighscores} from "./Utils/localHighscores";
+
 const asyncGameSection = asyncComponent(() => import("./Container/GameSection"));
 
 class BrainTrainer extends Component {
@@ -22,7 +24,6 @@ class BrainTrainer extends Component {
 
     render() {
 
-
         const routes = [
             {
                 path:'/',
@@ -38,7 +39,10 @@ class BrainTrainer extends Component {
             },
             {
                 path:'/highscores',
-                component:HighScoreList
+                component: HighScoreList,
+                componentProps: {
+                    scores: loadLocalHighscores()
+                }
             },
         ];
 
@@ -64,5 +68,6 @@ class BrainTrainer extends Component {
 const mapDispatchToProps = dispatch => ({
     onDifficultySelected : (difficulty) => dispatch({difficulty,type:'SET_DIFFICULTY'})
 });
+
 
 export default withRouter(connect(null,mapDispatchToProps)(BrainTrainer));
