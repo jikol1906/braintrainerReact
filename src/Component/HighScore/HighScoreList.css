@@ -11,13 +11,23 @@ body {
   padding: 10px;
   box-sizing: border-box; }
   .highscores li {
-    display: flex;
     list-style: none;
     background: rgba(255, 255, 255, 0.025);
     padding: 10px 20px;
+      border-radius: 5px;
     color: #fff;
     margin: 5px 0;
     transition: .50s; }
+
+.highscores span {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+}
+
+.highscores span:nth-child(1) {
+    border-right: 1px solid black;
+}
   .highscores li:nth-child(1) {
     background: rgba(255, 255, 255, 0.6); }
   .highscores li:nth-child(2) {
@@ -32,17 +42,5 @@ body {
     background: rgba(255, 255, 255, 0.05); }
   .highscores li:nth-child(7) {
     background: rgba(255, 255, 255, 0.025); }
-  .highscores li span:nth-child(1) {
-    width: 30px; }
-  .highscores li span:nth-child(2) {
-    width: 200px; }
-  .highscores li span:nth-child(3) {
-    width: 100px;
-    text-align: right; }
-  .highscores li span:nth-child(4) {
-    width: 70px;
-    text-align: right; }
-  .highscores li:hover {
-    transform: scale(1.09); }
 
 /*# sourceMappingURL=HighScoreList.css.map */
