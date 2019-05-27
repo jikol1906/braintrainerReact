@@ -11,11 +11,11 @@ class HighScoreList extends Component {
         return (
             <React.Fragment>
                 <ul className="highscores">
-                    {this.props.scores.map(({name, scores}, i) => {
+                    {this.props.scores.map(({name, correct, total}, i) => {
                         return (
                             <li key={i}>
                                 <span className="number">{i}</span>
-                                <span className="points">{scores}</span>
+                                <span className="points">{`${correct}/${total}`}</span>
                             </li>
                         )
                     })}

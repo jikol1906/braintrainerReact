@@ -28,8 +28,6 @@ export class QuestionGenerator {
 
         shuffle(arr);
 
-        console.log(arr);
-
         for (let i = 0; i < 4; i++) {
 
             this._numbers[i] = arr.pop()
