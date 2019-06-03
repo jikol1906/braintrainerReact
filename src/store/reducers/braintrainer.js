@@ -1,6 +1,4 @@
 
-
-
 const initialState = {
     difficulty:null,
     correctAnswers:0,

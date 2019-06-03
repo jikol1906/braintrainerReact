@@ -9,6 +9,7 @@ const Menu = props => {
             <Button clicked={() => props.diffSelected('easy')}>Easy</Button>
             <Button clicked={() => props.diffSelected('medium')} >Medium</Button>
             <Button clicked={() => props.diffSelected('hard')} >Hard</Button>
+            <Button clicked={() => props.highscoresSelected()}>Highscores</Button>
         </div>
     );
 };

@@ -3,18 +3,19 @@ import './Board.scss'
 import Board from "./Board";
 import {QuestionGenerator} from "../Utils/QuestionGenerator";
 import GameStats from "../Component/GameStats/GameStats";
-import Button from "../UI/Button/Button";
-import Overlay from "../Layout/Overlay";
+import {connect} from 'react-redux';
 import Modal from "../Layout/Modal/Modal";
+import {saveLocalHighscore} from "../Utils/localHighscores";
+import {Redirect} from "react-router-dom";
 
 
-export default class GameSection extends Component {
+class GameSection extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            intervalId:null,
+            intervalId: null,
             squareOne: null,
             squareTwo: null,
             squareThree: null,
@@ -24,11 +25,12 @@ export default class GameSection extends Component {
             timeLeft: null,
             gameStarted: false,
             gameEnded: false,
-            numOfQuestions:0,
-            correctAnswers:0
+            numOfQuestions: 0,
+            correctAnswers: 0,
+            toHighscores: false
         };
 
-        this.generator = new QuestionGenerator(30,40)
+        this.generator = new QuestionGenerator(30, 40)
     }
 
 
@@ -36,10 +38,10 @@ export default class GameSection extends Component {
 
         this.setState({
             gameStarted: true,
-            gameEnded:false,
-            numOfQuestions:0,
-            correctAnswers:0,
-            timeLeft:60
+            gameEnded: false,
+            numOfQuestions: 0,
+            correctAnswers: 0,
+            timeLeft: 60
         });
         this.startTimer();
         this.setNewNumbersAndQuestion();
@@ -49,25 +51,34 @@ export default class GameSection extends Component {
         const intervalId =
             setInterval(() => {
 
-                if(this.state.timeLeft === 0) {
+                if (this.state.timeLeft === 0) {
                     this.endGame()
                 } else {
                     this.setState((prevState) => ({
-                        timeLeft:prevState.timeLeft-1
-                    }))
+                        timeLeft: prevState.timeLeft - 1
+                    }));
                 }
-            },1000);
+            }, 1000);
 
         this.setState({intervalId})
+    };
+
+    saveScore = () => {
+        saveLocalHighscore({
+            correct: this.state.correctAnswers,
+            total: this.state.numOfQuestions
+        });
+
+        this.setState(() => ({toHighscores: true}))
     };
 
     squareClickedHandler = (squareValue) => {
 
 
         this.setState((prevState) => ({
-            numOfQuestions: prevState.numOfQuestions+1,
+            numOfQuestions: prevState.numOfQuestions + 1,
             correctAnswers: squareValue === this.state.correctAnswer ?
-                        prevState.correctAnswers+1:prevState.correctAnswers
+                prevState.correctAnswers + 1 : prevState.correctAnswers
         }));
 
         this.setNewNumbersAndQuestion()
@@ -77,7 +88,7 @@ export default class GameSection extends Component {
 
         this.generator.generateNumbers();
         this.generator.generateQuestion();
-        this.generator.incrementDifficulty();
+        this.generator.incrementRange();
 
         const numbers = this.generator.numbers;
 
@@ -86,8 +97,8 @@ export default class GameSection extends Component {
             squareTwo: numbers[1],
             squareThree: numbers[2],
             squareFour: numbers[3],
-            question:this.generator.question,
-            correctAnswer:this.generator.answer
+            question: this.generator.question,
+            correctAnswer: this.generator.answer
 
         })
 
@@ -97,11 +108,20 @@ export default class GameSection extends Component {
 
     endGame() {
         clearInterval(this.state.intervalId);
-        this.setState({gameEnded:true})
+        this.setState({gameEnded: true})
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId)
     }
 
 
     render() {
+
+        if (this.state.toHighscores) {
+            return <Redirect to="/highscores"/>
+        }
+
 
         return (
             <div>
@@ -110,6 +130,7 @@ export default class GameSection extends Component {
                     correct={this.state.correctAnswers}
                     numOfQuestions={this.state.numOfQuestions}
                     start={this.startGame}
+                    saveScore={this.saveScore}
                 />
                 <GameStats
                     gameStarted={this.state.gameStarted}
@@ -134,3 +155,8 @@ export default class GameSection extends Component {
 
 }
 
+const mapStateToProps = props => ({
+    difficulty: props.difficulty
+});
+
+export default connect(mapStateToProps)(GameSection)

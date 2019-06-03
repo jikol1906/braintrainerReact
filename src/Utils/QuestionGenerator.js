@@ -20,15 +20,22 @@ export class QuestionGenerator {
     }
 
     generateNumbers() {
+        const arr = [];
 
-        //Generate range of random numbers between this.min and this.max
-        const numbers = shuffle([...Array(this._max).keys()].slice(this._min, this._max));
-
-        for (let i = 0; i < 4; i++) {
-            this._numbers[i] = numbers[i]
+        for (let i = this._min; i <= this._max; i++) {
+            arr.push(i)
         }
 
-        //const term1 = Math.round(Math.random()*this._min)
+        shuffle(arr);
+
+        for (let i = 0; i < 4; i++) {
+
+            this._numbers[i] = arr.pop()
+        }
+
+        console.log(this._numbers);
+
+
     }
 
     generateQuestion() {
@@ -49,7 +56,7 @@ export class QuestionGenerator {
 
     }
 
-    incrementDifficulty() {
+    incrementRange() {
         this._min = this._min+1;
         this._max = this._max+1;
     }

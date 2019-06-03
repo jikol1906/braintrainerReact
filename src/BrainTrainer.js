@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import NavBar from "./Component/NavBar/NavBar";
-import GameSection from "./Container/GameSection";
 import {Route, Switch, withRouter} from "react-router-dom";
 import Menu from "./Component/Menu/Menu";
 import {connect} from 'react-redux';
-import Overlay from "./Layout/Overlay";
+import HighScoreList from "./Component/HighScore/HighScoreList";
+import asyncComponent from "./hoc/asyncComponent";
+import {loadLocalHighscores} from "./Utils/localHighscores";
 
-
+const asyncGameSection = asyncComponent(() => import("./Container/GameSection"));
 
 class BrainTrainer extends Component {
 
@@ -17,21 +18,32 @@ class BrainTrainer extends Component {
     };
 
 
-    render() {
+    viewHighscoresSelected = () => {
+        this.props.history.push('/highscores')
+    };
 
+    render() {
 
         const routes = [
             {
                 path:'/',
                 component:Menu,
                 componentProps:{
-                    diffSelected:this.difficultySelected
+                    diffSelected: this.difficultySelected,
+                    highscoresSelected: this.viewHighscoresSelected
                 }
             },
             {
                 path:'/braintrainer',
-                component:GameSection
-            }
+                component: asyncGameSection
+            },
+            {
+                path: '/highscores',
+                component: HighScoreList,
+                componentProps: {
+                    scores: loadLocalHighscores()
+                }
+            },
         ];
 
         return (
@@ -56,5 +68,6 @@ class BrainTrainer extends Component {
 const mapDispatchToProps = dispatch => ({
     onDifficultySelected : (difficulty) => dispatch({difficulty,type:'SET_DIFFICULTY'})
 });
+
 
 export default withRouter(connect(null,mapDispatchToProps)(BrainTrainer));
