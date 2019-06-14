@@ -1,208 +1,62 @@
-let input = "AAABA\n" +
-    "BBBBB\n" +
-    "ABAAA\n" +
-    "ABBBB\n" +
-    "AAAAA";
-
-
-input = input.split('\n').map(s => s.split(''));
-
-
-const adjList = []
-let counter = 0;
-
-for (let row = 0; row < input.length; row++) {
-    for (let column = 0; column < input.length; column++) {
-        adjList[counter++] = findNeighbours(input[row][column], row, column)
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
     }
+
+    return a;
 }
 
 
-function findNeighbours(inputElementElement, row, column, counter) {
+function range(min, max) {
 
-    const neighbours = [];
+    const arr = [];
 
-    if (isValidPoint(row, column + 1)) neighbours.push();
-    if (isValidPoint(row, column - 1)) neighbours.push();
-    if (isValidPoint(row + 1, column)) neighbours.push();
-    if (isValidPoint(row - 1, column)) neighbours.push()
+    for (let i = min; i <= max; i++) {
+        arr.push(i)
+    }
 
-    return neighbours;
+    return arr;
+
 }
 
-function isValidPoint(row, column) {
-    return row >= 0 && column >= 0 && row < input.length && column < input.length
-}
+function generateWrongAnswers(num) {
 
+    let nums;
 
-/*
-let isOnA = input.txt[0][0] === 'A';
-let currRow = 0;
-let currCol = 0;
-let length = 5;
-let steps = 0;
-
-
-function lookRight() {
-    return input.txt[currRow][currCol+1]
-}
-
-function lookDown() {
-    return input.txt[currRow+1] ? input.txt[currRow+1][currCol] : null;
-}
-
-function lookLeft() {
-    return input.txt[currRow][currCol-1]
-}
-
-function lookUp() {
-    return input.txt[currRow-1] ? input.txt[currRow-1][currCol] : null
-}
-
-function goRight() {
-    currCol++;
-    markVisited();
-}
-
-function goDown() {
-    currRow++;
-    markVisited();
-}
-
-function goLeft() {
-    currCol--;
-    markVisited();
-}
-
-function goUp() {
-    currRow--;
-    markVisited();
-}
-
-function markVisited() {
-    input.txt[currRow][currCol] = 'V';
-}
-
-function isVisited() {
-    return input.txt[currRow][currCol] === 'V';
-}
-
-function isFinished() {
-    return currCol === length-1 && currRow === length-1;
-}
-
-
-
-
-
-while(!isFinished()) {
-    if(isOnA) {
-        if(lookRight() === 'B') goRight();
-        else if(lookDown() === 'B') goDown();
-        else if(lookUp() === 'B') goUp();
-        else if(lookLeft() === 'B')
+    if (num < 4) {
+        nums = range(num+1,num+8)
     } else {
-        if(lookRight() === 'A') goRight();
-    }
-}
-*/
-
-
-/*
-var Stack = function () {
-    this.items = [];
-};
-Stack.prototype.enqueue = function (obj) {
-    this.items.push(obj);
-};
-Stack.prototype.dequeue = function () {
-    return this.items.shift();
-};
-Stack.prototype.isEmpty = function () {
-    return this.items.length === 0;
-};
-
-
-var doBFS = function (graph, source) {
-
-    var bfsInfo = [];
-
-    for (var row = 0; row < graph.length; row++) {
-        bfsInfo[row] = {
-            distance: null,
-            predecessor: null
-        };
+        nums = [...range(num - 4, num - 1), ...range(num + 1, num + 10)];
     }
 
-    bfsInfo[source].distance = 0;
+    shuffle(nums);
 
-    var queue = new Stack();
-    queue.enqueue(source);
-
-
-    while(!queue.isEmpty()) {
-
-        var currentVertix = queue.dequeue();
-
-        for (var row = 0; row < graph[currentVertix].length; row++) {
-
-            var neighbour = graph[currentVertix][row];
-
-            if (bfsInfo[neighbour].distance === null) {
-                bfsInfo[neighbour].distance = bfsInfo[currentVertix].distance + 1;
-                bfsInfo[neighbour].predecessor = currentVertix;
-
-                queue.enqueue(neighbour);
-            }
-        }
-    }
-
-    // Traverse tahe graph
-
-    // As long as the queue is not empty:
-    //  Repeatedly dequeue a vertex u from the queue.
-    //
-    //  For each neighbor v of u that has not been visited:
-    //     Set distance to 1 greater than u's distance
-    //     Set predecessor to u
-    //     Enqueue v
-    //
-    //  Hint:
-    //  use graph to get the neighbors,
-    //  use bfsInfo for distances and predecessors
-
-    return bfsInfo;
-};
-
-
-var adjList = [
-    [1],
-    [0, 4, 5],
-    [3, 4, 5],
-    [2, 6],
-    [1, 2],
-    [1, 2, 6],
-    [3, 5],
-    []
-];
-
-var bfsInfo = doBFS(adjList, 3);
-
-for (var row = 0; row < adjList.length; row++) {
-    console.log("vertex " + row + ": distance = " + bfsInfo[row].distance + ", predecessor = " + bfsInfo[row].predecessor);
+    return nums.slice(0,3);
 }
 
-
-
-
-
-function peekUp(arr,r,c) {
-    return (input.txt[r-1] ? input.txt[r-1][c] : null)
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-console.log(peekUp(input.txt, 1, 0));*/
+let num1 = getRandomInt(2,19);
+let num2 = getRandomInt(2,19);
 
 
+const correctAnswer = num1*num2;
+const answers = shuffle([correctAnswer,...generateWrongAnswers(num1*num2)]);
+
+console.log(`${num1}*${num2}`);
+console.log(answers);
+
+num1 = getRandomInt(2,100);
+num2 = getRandomInt(2,100);
+
+const correctAnswer1 = num1+num2;
+const answers1 = shuffle([correctAnswer1,...generateWrongAnswers(num1+num2)]);
 
 
-
+console.log(`${num1}+${num2}`);
+console.log(answers1);

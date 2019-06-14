@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing GameSection renders correctly 1`] = `
+<div
+  className="square "
+  onClick={null}
+>
+  <p
+    className="no-select"
+  />
+</div>
+`;

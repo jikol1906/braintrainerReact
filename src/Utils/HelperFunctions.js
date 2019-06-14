@@ -13,3 +13,29 @@ export function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
+
+export function range(min, max) {
+
+    const arr = [];
+
+    for (let i = min; i <= max; i++) {
+        arr.push(i)
+    }
+
+    return arr;
+
+}
+
+export function generateCloseNumbers(num) {
+
+    const nums = num > 4 ?
+        [...range(num-4,num-1),...range(num+1,num+5)] :
+        range(num+1,9);
+
+    shuffle(nums);
+
+    return nums;
+}
+
+
+console.log(generateCloseNumbers(5));
