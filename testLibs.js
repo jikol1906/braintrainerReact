@@ -45,8 +45,8 @@ let num1 = getRandomInt(2,19);
 let num2 = getRandomInt(2,19);
 
 
-const correctAnswer = num1*num2;
-const answers = shuffle([correctAnswer,...generateWrongAnswers(num1*num2)]);
+let correctAnswer = num1 * num2;
+let answers = shuffle([correctAnswer, ...generateWrongAnswers(num1 * num2)]);
 
 console.log(`${num1}*${num2}`);
 console.log(answers);
@@ -54,9 +54,25 @@ console.log(answers);
 num1 = getRandomInt(2,100);
 num2 = getRandomInt(2,100);
 
-const correctAnswer1 = num1+num2;
-const answers1 = shuffle([correctAnswer1,...generateWrongAnswers(num1+num2)]);
-
+correctAnswer = num1 + num2;
+answers = shuffle([correctAnswer, ...generateWrongAnswers(num1 + num2)]);
 
 console.log(`${num1}+${num2}`);
-console.log(answers1);
+console.log(answers);
+
+num1 = getRandomInt(2, 9);
+num2 = getRandomInt(2, 9);
+
+correctAnswer = num1;
+answers = shuffle([correctAnswer, ...generateWrongAnswers(num1)]);
+
+console.log(`${num1 * num2}/${num2}`)
+console.log(answers);
+
+
+
+
+
+
+
+
