@@ -60,13 +60,13 @@ answers = shuffle([correctAnswer, ...generateWrongAnswers(num1 + num2)]);
 console.log(`${num1}+${num2}`);
 console.log(answers);
 
-num1 = getRandomInt(2, 9);
-num2 = getRandomInt(2, 9);
+num1 = getRandomInt(2, 20);
+num2 = getRandomInt(2, 10);
 
 correctAnswer = num1;
 answers = shuffle([correctAnswer, ...generateWrongAnswers(num1)]);
 
-console.log(`${num1 * num2}/${num2}`)
+console.log(`${num1 * num2}/${num2}`);
 console.log(answers);
 
 

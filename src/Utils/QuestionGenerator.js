@@ -1,7 +1,6 @@
-import {getRandomInt, shuffle} from "./HelperFunctions";
+import {generateWrongAnswers, getRandomInt, shuffle} from "./HelperFunctions";
 
 export class QuestionGenerator {
-
 
 
     constructor(
@@ -12,74 +11,84 @@ export class QuestionGenerator {
 
         this._min = min;
         this._max = max;
-        this._question=null;
-        this._answer=null;
+        this._question = null;
+        this._answer = null;
         this._numbers = [];
         this._divisionAndMultiplicationEnabled = divisionAndMultiplicationEnabled;
 
     }
 
-    generateNumbers() {
-        const arr = [];
-
-        for (let i = this._min; i <= this._max; i++) {
-            arr.push(i)
-        }
-
-        shuffle(arr);
-
-        for (let i = 0; i < 4; i++) {
-
-            this._numbers[i] = arr.pop()
-        }
-
-        console.log(this._numbers);
-
-
-    }
 
     generateQuestion() {
 
-        if(this.numbers.length !== 0) {
-
-            //Pick random number from numbers
-            this._answer = this.numbers[getRandomInt(0,4)];
-
-            //Generate either addition or subtraction question
-            if(getRandomInt(0,2)===1) {
+        switch (getRandomInt(0, 4)) {
+            case 0:
                 this.generateAdditionQuestion();
-            } else {
+                break;
+            case 1:
                 this.generateSubtractionQuestion();
-            }
+                break;
+            case 2:
+                this.generateMultiplicationQuestion();
+                break;
+            case 3:
+                this.generateMultiplicationQuestion();
+                break;
 
         }
 
     }
 
     incrementRange() {
-        this._min = this._min+1;
-        this._max = this._max+1;
+        this._min = this._min + 1;
+        this._max = this._max + 1;
     }
 
 
     generateAdditionQuestion() {
-        const rand = getRandomInt(this.answer / 2, this.answer);
-        const toAdd = this.answer - rand;
-        this._question = `${rand}+${toAdd}`
+
+        let num2 = getRandomInt(1, 50);
+        let num1 = getRandomInt(1, 50);
+
+        this._answer = num1 + num2;
+        this._question = `${num1}+${num2}`;
+
+        this.setNumbers()
+
     }
 
     generateSubtractionQuestion() {
-        const rand = getRandomInt(0, this.answer/2);
-        const toSubtract = this.answer + rand;
-        this._question = `${toSubtract}-${rand}`
+
+        const num2 = getRandomInt(0, 25);
+        const num1 = getRandomInt(25, 50);
+
+        this._answer = num1 - num2;
+        this._question = `${num1}-${num2}`;
+
+        this.setNumbers()
+
     }
 
-    reset(min,max) {
+    generateMultiplicationQuestion() {
+
+        const num2 = getRandomInt(1, 10);
+        const num1 = getRandomInt(1, 20);
+
+        this._answer = num1 * num2;
+        this._question = `${num1}*${num2}`;
+
+        this.setNumbers()
+
+    }
+
+    setNumbers() {
+        this._numbers = shuffle([this._answer, ...generateWrongAnswers(this._answer)])
+    }
+
+    reset(min, max) {
         this._min = min;
         this._max = max;
     }
-
-
 
 
 //Getters

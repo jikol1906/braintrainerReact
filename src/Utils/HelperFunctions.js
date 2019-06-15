@@ -1,3 +1,4 @@
+//Shuffles array (puts it in random order)
 export function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -14,6 +15,10 @@ export function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
+/**
+ * @description
+ * @param min
+ * **/
 export function range(min, max) {
 
     const arr = [];
@@ -26,16 +31,20 @@ export function range(min, max) {
 
 }
 
-export function generateCloseNumbers(num) {
+export function generateWrongAnswers(num) {
 
-    const nums = num > 4 ?
-        [...range(num-4,num-1),...range(num+1,num+5)] :
-        range(num+1,9);
+    let nums;
+
+    if (num < 4) {
+        nums = range(num + 1, num + 8)
+    } else {
+        nums = [...range(num - 4, num - 1), ...range(num + 1, num + 10)];
+    }
 
     shuffle(nums);
 
-    return nums;
+    return nums.slice(0, 3);
 }
 
 
-console.log(generateCloseNumbers(5));
+

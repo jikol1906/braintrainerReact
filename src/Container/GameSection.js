@@ -86,9 +86,8 @@ class GameSection extends Component {
 
     setNewNumbersAndQuestion() {
 
-        this.generator.generateNumbers();
+
         this.generator.generateQuestion();
-        this.generator.incrementRange();
 
         const numbers = this.generator.numbers;
 
