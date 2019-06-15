@@ -32,7 +32,7 @@ export class QuestionGenerator {
                 this.generateMultiplicationQuestion();
                 break;
             case 3:
-                this.generateMultiplicationQuestion();
+                this.generateDivisionQuestion();
                 break;
 
         }
@@ -76,6 +76,18 @@ export class QuestionGenerator {
 
         this._answer = num1 * num2;
         this._question = `${num1}*${num2}`;
+
+        this.setNumbers()
+
+    }
+
+    generateDivisionQuestion() {
+
+        const num2 = getRandomInt(1, 10);
+        const num1 = getRandomInt(1, 20);
+
+        this._answer = num2;
+        this._question = `${num2 * num1}/${num1}`
 
         this.setNumbers()
 
