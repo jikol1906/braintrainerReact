@@ -17,23 +17,20 @@ export class QuestionGenerator {
 
     generateQuestion() {
 
-        /*        switch (getRandomInt(0, 4)) {
-                    case 0:
-                        this.generateAdditionQuestion();
-                        break;
-                    case 1:
-                        this.generateSubtractionQuestion();
-                        break;
-                    case 2:
-                        this.generateMultiplicationQuestion();
-                        break;
-                    case 3:
-                        this.generateDivisionQuestion();
-                        break;
-
-                }*/
-
-        this.generateAdditionQuestion()
+        switch (getRandomInt(0, 4)) {
+            case 0:
+                this.generateAdditionQuestion();
+                break;
+            case 1:
+                this.generateSubtractionQuestion();
+                break;
+            case 2:
+                this.generateMultiplicationQuestion();
+                break;
+            case 3:
+                this.generateDivisionQuestion();
+                break;
+        }
 
     }
 
@@ -47,8 +44,6 @@ export class QuestionGenerator {
 
         const additionMax = this.getMax('addition');
 
-        console.log(additionMax);
-
         let num2 = getRandomInt(1, additionMax);
         let num1 = getRandomInt(1, additionMax);
 
@@ -61,10 +56,10 @@ export class QuestionGenerator {
 
     generateSubtractionQuestion() {
 
-        const subtractionMax = this.getMax('subtraction')
+        const subtractionMax = this.getMax('subtraction');
 
         const num2 = getRandomInt(0, 10);
-        const num1 = getRandomInt(10, 25);
+        const num1 = getRandomInt(subtractionMax-15, subtractionMax);
 
         this._answer = num1 - num2;
         this._question = `${num1}-${num2}`;
@@ -75,10 +70,10 @@ export class QuestionGenerator {
 
     generateMultiplicationQuestion() {
 
-        const multiplicationMax = this.getMax('multiplication')
+        const multiplicationMax = this.getMax('multiplication');
 
-        const num2 = getRandomInt(1, 10);
-        const num1 = getRandomInt(1, 10);
+        const num2 = getRandomInt(1, multiplicationMax);
+        const num1 = getRandomInt(1, multiplicationMax);
 
         this._answer = num1 * num2;
         this._question = `${num1}*${num2}`;
@@ -91,8 +86,8 @@ export class QuestionGenerator {
 
         const divisionMax = this.getMax('division');
 
-        const num2 = getRandomInt(1, 10);
-        const num1 = getRandomInt(1, 10);
+        const num2 = getRandomInt(1, divisionMax);
+        const num1 = getRandomInt(1, divisionMax);
 
         this._answer = num2;
         this._question = `${num2 * num1}/${num1}`;

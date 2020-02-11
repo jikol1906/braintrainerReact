@@ -2,7 +2,7 @@ export function loadLocalHighscores() {
 
     const scores = localStorage.getItem('highscores');
     if (!scores) return [];
-    return JSON.parse(scores).sort((a, b) => b.correct / b.total - a.correct / a.total);
+    return JSON.parse(scores).sort((a, b) => b.correct - a.correct);
 }
 
 export function saveLocalHighscore(score) {

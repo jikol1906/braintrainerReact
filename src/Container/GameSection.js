@@ -9,6 +9,7 @@ import {saveLocalHighscore} from "../Utils/localHighscores";
 import {Redirect} from "react-router-dom";
 
 
+
 class GameSection extends Component {
 
     constructor(props) {
@@ -108,6 +109,19 @@ class GameSection extends Component {
     endGame() {
         clearInterval(this.state.intervalId);
         this.setState({gameEnded: true})
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', e => {
+            switch (e.code) {
+                case 'KeyQ':
+                    console.log('key Q pressed')
+                    break;
+            
+                default:
+                    break;
+            }
+        });
     }
 
     componentWillUnmount() {
