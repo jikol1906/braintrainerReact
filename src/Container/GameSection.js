@@ -105,6 +105,23 @@ class GameSection extends Component {
 
     }
 
+    _handleKeyPress = e => {
+        switch (e.code) {
+            case 'KeyQ':
+                this.squareClickedHandler(this.state.squareOne)
+                break;
+            case 'KeyW':
+                this.squareClickedHandler(this.state.squareTwo)
+                break;
+            case 'KeyA':
+                this.squareClickedHandler(this.state.squareThree)
+                break;
+            case 'KeyS':
+                this.squareClickedHandler(this.state.squareFour)
+                break;
+        }
+    }
+
 
     endGame() {
         clearInterval(this.state.intervalId);
@@ -112,19 +129,11 @@ class GameSection extends Component {
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', e => {
-            switch (e.code) {
-                case 'KeyQ':
-                    console.log('key Q pressed')
-                    break;
-            
-                default:
-                    break;
-            }
-        });
+        document.addEventListener('keydown',this._handleKeyPress);
     }
 
     componentWillUnmount() {
+        document.removeEventListener('keydown',this._handleKeyPress)
         clearInterval(this.state.intervalId)
     }
 
